@@ -1,0 +1,37 @@
+User-agent: *
+Allow: /
+
+# Search Engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# AI & Research Agents
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Machine-readable endpoints
+Sitemap: https://trevorkouritzin.com/sitemap-index.xml
+# LLMs.txt: https://trevorkouritzin.com/llms.txt
+# Structured JSON Profile: https://trevorkouritzin.com/api/profile.json
+# RSS Feed: https://trevorkouritzin.com/rss.xml

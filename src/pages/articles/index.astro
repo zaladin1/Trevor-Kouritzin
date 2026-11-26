@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticlesExplorer from '../../components/ArticlesExplorer';
+import HedCalculator from '../../components/HedCalculator';
+import { ARTICLES, SITE_INFO } from '../../data/siteData';
+
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Articles', path: '/articles' },
+];
+
+const blogSchema = {
+  '@type': 'Blog',
+  name: 'Dr. Trevor Kouritzin — Evidence-Based Research Articles',
+  description:
+    'Research-driven articles on nutrition, endocrinology, dietary supplements, and human performance.',
+  author: { '@id': `${SITE_INFO.siteUrl}/#person` },
+  blogPost: ARTICLES.map((a) => ({
+    '@type': 'BlogPosting',
+    headline: a.title,
+    datePublished: a.date,
+    url: `${SITE_INFO.siteUrl}/articles/${a.slug}`,
+    image: `${SITE_INFO.siteUrl}${a.image}`,
+  })),
+};
+---
+
+<BaseLayout
+  title="Evidence-Based Articles — Dr. Trevor Kouritzin"
+  description="Research-driven articles on collagen, testosterone physiology, omega-3s, L-carnitine, allometric dosing, and study design by Dr. Trevor Kouritzin."
+  canonicalPath="/articles"
+  ogImage={SITE_INFO.images.articles}
+  breadcrumbs={breadcrumbs}
+  jsonLd={blogSchema}
+>
+  <section class="border-b border-[#0B0C0E]/15 bg-[#F5F4F0]">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 py-14 sm:py-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-8 space-y-4">
+          <p class="text-xs font-semibold tracking-wide text-[#163A5F]">
+            Research Breakdowns &amp; Field Notes
+          </p>
+          <h1 class="font-serif text-4xl sm:text-6xl font-semibold text-[#0B0C0E] tracking-tight leading-[1.06]">
+            Evidence-Based Articles
+          </h1>
+          <p class="text-base sm:text-lg text-[#52565E] leading-relaxed max-w-2xl">
+            Insights on the science behind dietary supplements, hormonal physiology, protein signaling, and practical nutritional strategies for athletes and clinicians.
+          </p>
+        </div>
+
+        <div class="lg:col-span-4">
+          <div class="aspect-square max-w-[260px] lg:ml-auto overflow-hidden border border-[#0B0C0E]/15 bg-white">
+            <img
+              src={SITE_INFO.images.articles}
+              alt="Dr. Trevor Kouritzin editorial portrait"
+              width="600"
+              height="600"
+              referrerpolicy="no-referrer"
+              class="w-full h-full object-cover object-top"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-14 sm:py-20 space-y-16">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 space-y-16">
+      <ArticlesExplorer client:load articles={ARTICLES} />
+      <HedCalculator client:visible />
+    </div>
+  </section>
+</BaseLayout>

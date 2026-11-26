@@ -1,0 +1,25 @@
+# Dr. Trevor Kouritzin
+
+> Clinical nutrition researcher, Ph.D. in Medicine (Preventive Medicine), M.Sc. in Human Nutrition, B.Sc. in Chemical Engineering, supplement formulation specialist, and IFBB Pro bodybuilder based in Edmonton, Alberta, Canada.
+
+Dr. Trevor Kouritzin translates peer-reviewed medical, nutritional, and biochemical evidence into actionable clinical and athletic performance strategies. When direct clinical evidence is lacking, he advocates for structured behavioral framework models to guide decision-making.
+
+## Primary Pages
+- [Home](https://trevorkouritzin.com/): Executive overview, methodology, featured research articles, and peer-reviewed publications.
+- [Meet Dr. Trevor](https://trevorkouritzin.com/meet-trevor): Academic credentials, competitive athletic background, and speaking formats.
+- [Services & E-Books](https://trevorkouritzin.com/services): 1-Hour Zoom Consultation ($200), Ketogenic Diets Explained E-Book ($10), and Size & Strength E-Book ($10).
+- [Evidence-Based Articles](https://trevorkouritzin.com/articles): Searchable research breakdowns with PubMed & DOI citations plus an interactive Human Equivalent Dose (HED) calculator.
+- [Peer-Reviewed Publications](https://trevorkouritzin.com/publications): Published journal articles and conference proceedings with BibTeX/APA citation export.
+- [Contact & Speaking](https://trevorkouritzin.com/contact): Direct consulting inquiries, academic/industry speaking requests, and newsletter subscription.
+
+## Machine-Readable Endpoints
+- [Structured JSON Profile](https://trevorkouritzin.com/api/profile.json): Complete JSON representation of credentials, services, articles, and publications.
+- [RSS Feed](https://trevorkouritzin.com/rss.xml): Syndicated feed of research articles.
+- [XML Sitemap](https://trevorkouritzin.com/sitemap-index.xml): Full canonical URL index.
+
+## Contact
+- Email: Info@DoctorTrev.com
+- Location: Edmonton, Alberta, Canada
+- Instagram: https://www.instagram.com/trevorkouritzin/
+- YouTube: https://www.youtube.com/trevorkouritzin
+- LinkedIn: https://www.linkedin.com/in/trevor-kouritzin-9b8558209/

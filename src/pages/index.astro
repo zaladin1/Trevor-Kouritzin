@@ -1,0 +1,465 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HedCalculator from '../components/HedCalculator';
+import NewsletterForm from '../components/NewsletterForm';
+import { SITE_INFO, ARTICLES, PUBLICATIONS, SERVICES } from '../data/siteData';
+
+const leadArticle = ARTICLES[0];
+const secondaryArticles = ARTICLES.slice(1, 3);
+const archiveArticles = ARTICLES.slice(3, 8);
+const featuredPublications = PUBLICATIONS.slice(0, 4);
+
+const homeJsonLd = {
+  '@type': 'ProfilePage',
+  mainEntity: { '@id': `${SITE_INFO.siteUrl}/#person` },
+  about: 'Clinical Nutrition, Preventive Medicine, Supplement Formulation & Performance',
+};
+---
+
+<BaseLayout
+  title="Dr. Trevor Kouritzin — Clinical Nutrition, Medicine & Performance"
+  description="Dr. Trevor Kouritzin holds a PhD in Medicine, MSc in Human Nutrition, and BSc in Chemical Engineering. Evidence-based consulting, research articles, and publications."
+  canonicalPath="/"
+  ogImage={SITE_INFO.images.hero}
+  ogType="profile"
+  jsonLd={homeJsonLd}
+>
+  <!-- HERO: Stark Obsidian Editorial Cover -->
+  <section class="bg-[#0B0C0E] text-white border-b border-white/15">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 pt-10 pb-12 lg:pt-16 lg:pb-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-stretch">
+        <!-- Left Column: High-Contrast Editorial Headline -->
+        <div class="lg:col-span-7 flex flex-col justify-between space-y-8 py-2">
+          <div class="space-y-6">
+            <p class="text-xs font-semibold tracking-wide text-[#8AB4DC]">
+              Edmonton, Alberta · Medicine · Nutrition · Engineering
+            </p>
+            <h1 class="font-serif text-[clamp(2.65rem,5vw,4.5rem)] font-medium leading-[1.03] tracking-tight text-white">
+              Evidence-based methods to transform information into{' '}
+              <em class="italic font-normal text-[#8AB4DC]">actionable knowledge.</em>
+            </h1>
+            <p class="text-base sm:text-lg leading-relaxed text-[#B6BCC8] max-w-xl">
+              {SITE_INFO.heroSubheadline}
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-6 pt-2">
+            <a
+              href="/services#consultation"
+              class="inline-flex items-center justify-center px-7 py-4 text-xs font-semibold tracking-wide text-white bg-[#DC2626] hover:bg-[#B91C1C] transition-colors duration-150 whitespace-nowrap min-h-[44px]"
+              data-agent-action="primary-cta-book"
+            >
+              Book Consultation
+            </a>
+            <a
+              href="/articles"
+              class="inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-white/85 hover:text-white underline decoration-white/30 underline-offset-8 hover:decoration-white transition-colors whitespace-nowrap py-2 min-h-[44px]"
+            >
+              Read Research Index
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Column: Unrounded Editorial Portrait -->
+        <div class="lg:col-span-5">
+          <div class="h-full min-h-[360px] sm:min-h-[460px] bg-[#16181D] border border-white/15 overflow-hidden relative">
+            <img
+              src={SITE_INFO.images.hero}
+              alt="Dr. Trevor Kouritzin in white clinical coat"
+              width="1024"
+              height="1024"
+              referrerpolicy="no-referrer"
+              class="w-full h-full object-cover object-top"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Masthead Ledger Strip -->
+      <div class="mt-12 pt-8 border-t border-white/15 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        {SITE_INFO.credentials.map((cred, idx) => (
+          <div class="space-y-1">
+            <div class="flex items-baseline gap-2.5">
+              <span class="font-mono text-[11px] text-white/45 tabular-nums">0{idx + 1}</span>
+              <p class="font-serif text-xl font-medium text-white">{cred.label}</p>
+            </div>
+            <p class="text-xs leading-relaxed text-[#9CA3AF] pl-6">{cred.detail}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: Speaking & Knowledge Translation Ledger (No SaaS Cards) -->
+  <section class="border-b border-[#E2E0DA] bg-white">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 py-14 sm:py-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <div class="lg:col-span-4 space-y-4">
+          <p class="text-xs font-semibold tracking-wide text-[#163A5F]">
+            Speaking &amp; Advisory
+          </p>
+          <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-[#0B0C0E] leading-tight">
+            Translating primary trials for clinicians, brands &amp; athletes
+          </h2>
+          <p class="text-sm leading-relaxed text-[#52565E]">
+            Available for academic symposia, executive R&amp;D briefings, podcasts, and applied workshops.
+          </p>
+          <div class="pt-2">
+            <a
+              href="/contact"
+              class="inline-flex items-center text-xs font-semibold tracking-wide text-[#0B0C0E] underline decoration-[#0B0C0E]/30 underline-offset-8 hover:decoration-[#163A5F] hover:text-[#163A5F] transition-colors"
+            >
+              Inquire for speaking dates
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-8 divide-y divide-[#E2E0DA] border-t border-b border-[#E2E0DA]">
+          {SITE_INFO.speakingFormats.map((item) => (
+            <div class="py-5 sm:py-6 grid grid-cols-1 sm:grid-cols-12 gap-3 sm:gap-6 items-baseline">
+              <span class="sm:col-span-1 font-mono text-xs text-[#163A5F] tabular-nums">{item.index}</span>
+              <h3 class="sm:col-span-4 font-serif text-2xl font-semibold text-[#0B0C0E]">{item.title}</h3>
+              <p class="sm:col-span-7 text-sm leading-relaxed text-[#52565E]">{item.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: Meet Dr. Trevor Kouritzin (Drop-Cap Monograph Bio) -->
+  <section class="border-b border-[#E2E0DA] bg-[#F5F4F0]">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 py-14 sm:py-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-stretch">
+        <div class="lg:col-span-5 order-2 lg:order-1">
+          <div class="h-full min-h-[360px] bg-[#E2E0DA] border border-[#0B0C0E]/15 overflow-hidden">
+            <img
+              src={SITE_INFO.images.meet}
+              alt="Dr. Trevor Kouritzin in academic library"
+              width="1024"
+              height="1024"
+              loading="lazy"
+              referrerpolicy="no-referrer"
+              class="w-full h-full object-cover object-top"
+            />
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 order-1 lg:order-2 flex flex-col justify-center space-y-6">
+          <div class="space-y-2 pb-4 border-b border-[#0B0C0E]/15">
+            <p class="text-xs font-semibold tracking-wide text-[#163A5F]">
+              Biography · Owner &amp; Coach
+            </p>
+            <h2 class="font-serif text-3xl sm:text-5xl font-semibold text-[#0B0C0E] leading-[1.08]">
+              Meet Dr. Trevor Kouritzin
+            </h2>
+          </div>
+
+          <div class="space-y-4 text-base leading-[1.75] text-[#272B33]">
+            <p class="first-letter:font-serif first-letter:text-5xl first-letter:font-semibold first-letter:float-left first-letter:mr-3 first-letter:leading-none first-letter:text-[#0B0C0E]">
+              {SITE_INFO.bioParagraphs[0]}
+            </p>
+            {SITE_INFO.bioParagraphs.slice(1).map((para) => (
+              <p>{para}</p>
+            ))}
+          </div>
+
+          <div class="pt-3 flex flex-wrap items-center gap-6">
+            <a
+              href="/meet-trevor"
+              class="inline-flex items-center justify-center px-6 py-3 text-xs font-semibold tracking-wide text-white bg-[#0B0C0E] hover:bg-[#163A5F] transition-colors whitespace-nowrap min-h-[44px]"
+            >
+              Read Full Profile
+            </a>
+            <span class="text-xs font-mono text-[#52565E]">{SITE_INFO.location}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: 3-Tier Editorial Front-Page Research Spread -->
+  <section class="border-b border-[#E2E0DA] bg-white">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 py-14 sm:py-20 space-y-12">
+      <!-- Section Masthead -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-[#0B0C0E]">
+        <div class="space-y-2">
+          <p class="text-xs font-semibold tracking-wide text-[#163A5F]">
+            Journal &amp; Research Notes
+          </p>
+          <h2 class="font-serif text-3xl sm:text-5xl font-semibold text-[#0B0C0E] tracking-tight">
+            Evidence-Based Articles
+          </h2>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <img
+            src={SITE_INFO.images.articles}
+            alt="Dr. Trevor Kouritzin editorial portrait"
+            width="64"
+            height="64"
+            loading="lazy"
+            referrerpolicy="no-referrer"
+            class="w-12 h-12 object-cover object-top border border-[#0B0C0E]/20 shrink-0"
+          />
+          <a
+            href="/articles"
+            class="inline-flex items-center justify-center px-5 py-3 text-xs font-semibold tracking-wide text-[#0B0C0E] border border-[#0B0C0E] hover:bg-[#0B0C0E] hover:text-white transition-colors whitespace-nowrap min-h-[44px]"
+          >
+            All {ARTICLES.length} Articles
+          </a>
+        </div>
+      </div>
+
+      <!-- Tier 1 (Lead Story) + Tier 2 (Secondary Duo) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 pb-10 border-b border-[#E2E0DA]">
+        <!-- Lead Story (7 cols) -->
+        <article class="lg:col-span-7 group flex flex-col justify-between space-y-5 lg:pr-8 lg:border-r lg:border-[#E2E0DA]">
+          <a href={`/articles/${leadArticle.slug}`} class="block aspect-[16/10] bg-[#F5F4F0] border border-[#E2E0DA] overflow-hidden">
+            <img
+              src={leadArticle.image}
+              alt={leadArticle.imageAlt}
+              loading="lazy"
+              referrerpolicy="no-referrer"
+              class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+            />
+          </a>
+          <div class="space-y-3">
+            <div class="flex items-center gap-2 text-xs text-[#52565E] tabular-nums">
+              <span class="font-semibold tracking-wide text-[#163A5F]">{leadArticle.category}</span>
+              <span aria-hidden="true">·</span>
+              <span>Lead Breakdown</span>
+              <span aria-hidden="true">·</span>
+              <span>{leadArticle.readTimeMinutes} min read</span>
+            </div>
+            <h3 class="font-serif text-3xl sm:text-4xl font-semibold text-[#0B0C0E] leading-[1.1]">
+              <a href={`/articles/${leadArticle.slug}`} class="hover:text-[#163A5F] transition-colors">
+                {leadArticle.title}
+              </a>
+            </h3>
+            <p class="text-base leading-relaxed text-[#52565E]">{leadArticle.excerpt}</p>
+            <div class="pt-1">
+              <a
+                href={`/articles/${leadArticle.slug}`}
+                class="text-xs font-semibold tracking-wide text-[#0B0C0E] underline underline-offset-8 decoration-[#0B0C0E]/30 hover:text-[#163A5F] hover:decoration-[#163A5F]"
+              >
+                Read Full Breakdown
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Secondary Duo (5 cols) -->
+        <div class="lg:col-span-5 flex flex-col justify-between divide-y divide-[#E2E0DA]">
+          {secondaryArticles.map((article, idx) => (
+            <article class={`group flex flex-col sm:flex-row lg:flex-col gap-5 ${idx === 0 ? 'pb-8' : 'pt-8'}`}>
+              <a
+                href={`/articles/${article.slug}`}
+                class="block sm:w-44 lg:w-full aspect-[16/9] bg-[#F5F4F0] border border-[#E2E0DA] overflow-hidden shrink-0"
+              >
+                <img
+                  src={article.image}
+                  alt={article.imageAlt}
+                  loading="lazy"
+                  referrerpolicy="no-referrer"
+                  class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                />
+              </a>
+              <div class="space-y-2">
+                <div class="flex items-center gap-2 text-xs text-[#52565E] tabular-nums">
+                  <span class="font-semibold tracking-wide text-[#163A5F]">{article.category}</span>
+                  <span aria-hidden="true">·</span>
+                  <span>{article.readTimeMinutes} min read</span>
+                </div>
+                <h3 class="font-serif text-2xl font-semibold text-[#0B0C0E] leading-snug">
+                  <a href={`/articles/${article.slug}`} class="hover:text-[#163A5F] transition-colors">
+                    {article.title}
+                  </a>
+                </h3>
+                <p class="text-sm text-[#52565E] line-clamp-2 leading-relaxed">{article.excerpt}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <!-- Tier 3: Compact Numbered Archive Ledger -->
+      <div class="space-y-4">
+        <p class="text-xs font-semibold tracking-wide text-[#52565E]">
+          Recent Index
+        </p>
+        <div class="divide-y divide-[#E2E0DA] border-y border-[#E2E0DA]">
+          {archiveArticles.map((article, idx) => (
+            <a
+              href={`/articles/${article.slug}`}
+              class="group py-4 grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-6 items-baseline hover:bg-[#F5F4F0]/60 px-2 -mx-2 transition-colors"
+            >
+              <span class="sm:col-span-1 font-mono text-xs text-[#163A5F] tabular-nums">
+                0{idx + 4}
+              </span>
+              <span class="sm:col-span-3 text-xs font-medium text-[#52565E] tracking-wide">
+                {article.category}
+              </span>
+              <span class="sm:col-span-6 font-serif text-xl font-medium text-[#0B0C0E] group-hover:text-[#163A5F] transition-colors">
+                {article.title}
+              </span>
+              <span class="sm:col-span-2 sm:text-right font-mono text-xs text-[#52565E] tabular-nums">
+                {article.date}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Interactive Translational Pharmacology Instrument -->
+      <div class="pt-4">
+        <HedCalculator client:visible />
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: Peer-Reviewed Publications Spotlight -->
+  <section class="bg-[#0B0C0E] text-white border-b border-white/15">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 py-14 sm:py-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-stretch">
+        <div class="lg:col-span-7 flex flex-col justify-between space-y-8">
+          <div class="space-y-3">
+            <p class="text-xs font-semibold tracking-wide text-white/55">
+              Peer-Reviewed Literature
+            </p>
+            <h2 class="font-serif text-3xl sm:text-5xl font-semibold tracking-tight text-white leading-[1.08]">
+              Bridging medicine, nutrition, and performance
+            </h2>
+            <p class="text-base leading-relaxed text-[#B6BCC8] max-w-2xl">
+              Published peer-reviewed investigations across dietary supplementation, skeletal muscle anabolism, cardiovascular risk reduction, and preventive public health.
+            </p>
+          </div>
+
+          <div class="divide-y divide-white/15 border-y border-white/15">
+            {featuredPublications.map((pub) => (
+              <div class="py-4 space-y-1">
+                <div class="flex items-center gap-2 text-xs text-[#9CA3AF] tabular-nums">
+                  <span class="font-mono text-white">{pub.year}</span>
+                  <span aria-hidden="true">·</span>
+                  <span>{pub.journalOrVenue}</span>
+                </div>
+                <h3 class="font-serif text-xl font-medium text-white leading-snug">{pub.title}</h3>
+                <p class="text-xs text-[#9CA3AF]">{pub.authors}</p>
+              </div>
+            ))}
+          </div>
+
+          <div>
+            <a
+              href="/publications"
+              class="inline-flex items-center justify-center px-6 py-3.5 text-xs font-semibold tracking-wide text-[#0B0C0E] bg-white hover:bg-[#F5F4F0] transition-colors whitespace-nowrap min-h-[44px]"
+            >
+              Inspect Full Bibliography ({PUBLICATIONS.length})
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="h-full min-h-[360px] overflow-hidden border border-white/15 bg-[#16181D]">
+            <img
+              src={SITE_INFO.images.publications}
+              alt="Dr. Trevor Kouritzin in academic research library"
+              width="1024"
+              height="1024"
+              loading="lazy"
+              referrerpolicy="no-referrer"
+              class="w-full h-full object-cover object-top"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: Services & Monographs Catalog Preview -->
+  <section class="border-b border-[#E2E0DA] bg-[#F5F4F0]">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 py-14 sm:py-20 space-y-10">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-[#0B0C0E]/15">
+        <div class="space-y-2 max-w-2xl">
+          <p class="text-xs font-semibold tracking-wide text-[#163A5F]">
+            Advisory &amp; Monographs
+          </p>
+          <h2 class="font-serif text-3xl sm:text-5xl font-semibold text-[#0B0C0E] tracking-tight">
+            Consultations &amp; Digital Guides
+          </h2>
+          <p class="text-sm sm:text-base text-[#52565E]">
+            Backed by a 100% satisfaction guarantee.
+          </p>
+        </div>
+        <a
+          href="/services"
+          class="text-xs font-semibold tracking-wide text-[#0B0C0E] hover:text-[#163A5F] underline decoration-[#0B0C0E]/30 underline-offset-8 whitespace-nowrap self-start md:self-auto"
+        >
+          Schedule or Request
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        {SERVICES.map((srv) => (
+          <a
+            href={`/services#${srv.id === 'zoom-consultation' ? 'consultation' : srv.id}`}
+            class="group flex flex-col justify-between border-b border-[#0B0C0E]/15 pb-6"
+          >
+            <div class="space-y-4">
+              <div class="aspect-[4/3] bg-white overflow-hidden border border-[#E2E0DA]">
+                <img
+                  src={srv.image}
+                  alt={srv.imageAlt}
+                  loading="lazy"
+                  referrerpolicy="no-referrer"
+                  class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                />
+              </div>
+              <div class="flex items-baseline justify-between gap-3">
+                <h3 class="font-serif text-2xl font-semibold text-[#0B0C0E] group-hover:text-[#163A5F] transition-colors">
+                  {srv.title}
+                </h3>
+                <span class="font-mono text-base font-medium text-[#0B0C0E] tabular-nums shrink-0">
+                  ${srv.price.toFixed(2)}
+                </span>
+              </div>
+              <p class="text-sm text-[#52565E] leading-relaxed line-clamp-2">{srv.summary}</p>
+            </div>
+            <p class="text-xs font-semibold tracking-wide text-[#163A5F] pt-4">
+              {srv.ctaLabel}
+            </p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: Newsletter & Speaking Dispatch -->
+  <section class="bg-white">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 py-14 sm:py-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center border-y border-[#0B0C0E] py-10">
+        <div class="lg:col-span-6 space-y-2.5">
+          <p class="text-xs font-semibold tracking-wide text-[#163A5F]">
+            Evidence-Based Dispatch
+          </p>
+          <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-[#0B0C0E]">
+            Stay ahead with research &amp; behavioral frameworks
+          </h2>
+          <p class="text-sm sm:text-base text-[#52565E] leading-relaxed">
+            New clinical trial breakdowns, supplement formulation insights, and practical recommendations delivered directly to your inbox.
+          </p>
+        </div>
+
+        <div class="lg:col-span-6 space-y-4">
+          <NewsletterForm client:visible />
+          <div class="pt-3 border-t border-[#E2E0DA] flex flex-wrap items-center justify-between gap-3 text-xs text-[#52565E]">
+            <span>For Academic &amp; Industry Speaking Requests</span>
+            <a href="/contact" class="font-semibold tracking-wide text-[#0B0C0E] hover:text-[#163A5F] underline underline-offset-4">
+              Let’s Get Started
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

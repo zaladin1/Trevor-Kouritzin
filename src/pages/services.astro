@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServicesCatalog from '../components/ServicesCatalog';
+import { SERVICES, SITE_INFO } from '../data/siteData';
+
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Services', path: '/services' },
+];
+
+const serviceSchemas = SERVICES.map((srv) => ({
+  '@type': 'Service',
+  name: srv.title,
+  description: srv.summary,
+  provider: { '@id': `${SITE_INFO.siteUrl}/#person` },
+  offers: {
+    '@type': 'Offer',
+    price: srv.price.toFixed(2),
+    priceCurrency: srv.currency,
+    availability: 'https://schema.org/InStock',
+    url: `${SITE_INFO.siteUrl}/services#${srv.id}`,
+  },
+}));
+---
+
+<BaseLayout
+  title="Services & E-Books — Dr. Trevor Kouritzin"
+  description="Book a 1-hour Zoom consultation ($200) or explore Ketogenic Diets Explained ($10) and Size & Strength ($10) e-books by Dr. Trevor Kouritzin."
+  canonicalPath="/services"
+  ogImage="/images/service-zoom.png"
+  breadcrumbs={breadcrumbs}
+  jsonLd={serviceSchemas}
+>
+  <section class="border-b border-[#0B0C0E]/15 bg-[#F5F4F0]">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 py-14 sm:py-20 space-y-4">
+      <p class="text-xs font-semibold tracking-wide text-[#163A5F]">
+        Advisory &amp; Digital Monographs
+      </p>
+      <h1 class="font-serif text-4xl sm:text-6xl font-semibold text-[#0B0C0E] tracking-tight max-w-3xl leading-[1.06]">
+        Services &amp; Evidence-Based Guides
+      </h1>
+      <p class="text-base sm:text-lg text-[#52565E] max-w-2xl leading-relaxed">
+        Every consultation and digital publication is backed by my 100% satisfaction guarantee. Select individual items or combine them below.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-white py-14 sm:py-20">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10">
+      <ServicesCatalog client:load services={SERVICES} contactEmail={SITE_INFO.email} />
+    </div>
+  </section>
+</BaseLayout>

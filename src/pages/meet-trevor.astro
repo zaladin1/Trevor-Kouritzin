@@ -1,0 +1,148 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_INFO } from '../data/siteData';
+
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Meet Trevor', path: '/meet-trevor' },
+];
+---
+
+<BaseLayout
+  title="Meet Dr. Trevor Kouritzin — PhD, MSc, BSc, IFBB Pro"
+  description="Biography and credentials of Dr. Trevor Kouritzin: PhD in Medicine, MSc in Human Nutrition, BSc in Chemical Engineering, and IFBB Pro bodybuilder."
+  canonicalPath="/meet-trevor"
+  ogImage={SITE_INFO.images.meet}
+  ogType="profile"
+  breadcrumbs={breadcrumbs}
+>
+  <section class="bg-[#0B0C0E] text-white border-b border-white/15">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 py-14 sm:py-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-stretch">
+        <div class="lg:col-span-7 flex flex-col justify-center space-y-6">
+          <div class="space-y-3">
+            <p class="text-xs font-semibold tracking-wide text-white/60">
+              Owner &amp; Coach · Edmonton, Alberta
+            </p>
+            <h1 class="font-serif text-4xl sm:text-6xl font-medium text-white leading-[1.05] tracking-tight">
+              Meet Dr. Trevor Kouritzin
+            </h1>
+          </div>
+
+          <div class="space-y-4 text-base sm:text-lg leading-relaxed text-[#D1D5DB]">
+            {SITE_INFO.bioParagraphs.map((para) => (
+              <p>{para}</p>
+            ))}
+            <p class="text-[#9CA3AF]">
+              When controlled human data is incomplete or emerging, Dr. Kouritzin emphasizes transparent behavioral framework models—equipping clinicians, athletes, and supplement formulators to weigh risk, dose-response plausibility, and measurable outcomes.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-5 pt-2">
+            <a
+              href="/services#consultation"
+              class="inline-flex items-center justify-center px-6 py-3.5 text-xs font-semibold tracking-wide text-[#0B0C0E] bg-white hover:bg-[#F5F4F0] transition-colors min-h-[44px]"
+            >
+              Book Consultation
+            </a>
+            <a
+              href="/publications"
+              class="inline-flex items-center justify-center px-6 py-3.5 text-xs font-semibold tracking-wide text-white border border-white/30 hover:border-white transition-colors min-h-[44px]"
+            >
+              View Publications
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="h-full min-h-[380px] bg-[#16181D] border border-white/15 overflow-hidden">
+            <img
+              src={SITE_INFO.images.meet}
+              alt="Dr. Trevor Kouritzin portrait in research library"
+              width="1024"
+              height="1024"
+              referrerpolicy="no-referrer"
+              class="w-full h-full object-cover object-top"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interdisciplinary Foundations Ledger -->
+  <section class="border-b border-[#E2E0DA] bg-white">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 py-14 sm:py-20 space-y-10">
+      <div class="max-w-2xl space-y-2">
+        <p class="text-xs font-semibold tracking-wide text-[#163A5F]">
+          Academic &amp; Athletic Pillars
+        </p>
+        <h2 class="font-serif text-3xl sm:text-5xl font-semibold text-[#0B0C0E]">
+          Four disciplines informing one unified methodology
+        </h2>
+      </div>
+
+      <div class="divide-y divide-[#E2E0DA] border-y border-[#E2E0DA]">
+        <div class="py-7 grid grid-cols-1 md:grid-cols-12 gap-4 items-baseline">
+          <span class="md:col-span-1 font-mono text-xs text-[#163A5F]">01</span>
+          <h3 class="md:col-span-4 font-serif text-2xl font-semibold text-[#0B0C0E]">Ph.D. in Medicine (Preventive Medicine)</h3>
+          <p class="md:col-span-7 text-sm sm:text-base leading-relaxed text-[#52565E]">
+            University of Alberta research training in epidemiological study design, scoping reviews, community health environments, and chronic disease risk mitigation.
+          </p>
+        </div>
+
+        <div class="py-7 grid grid-cols-1 md:grid-cols-12 gap-4 items-baseline">
+          <span class="md:col-span-1 font-mono text-xs text-[#163A5F]">02</span>
+          <h3 class="md:col-span-4 font-serif text-2xl font-semibold text-[#0B0C0E]">M.Sc. in Human Nutrition</h3>
+          <p class="md:col-span-7 text-sm sm:text-base leading-relaxed text-[#52565E]">
+            Clinical investigation into dietary supplements, cardiometabolic biomarkers, lipid biochemistry, and human intervention trials.
+          </p>
+        </div>
+
+        <div class="py-7 grid grid-cols-1 md:grid-cols-12 gap-4 items-baseline">
+          <span class="md:col-span-1 font-mono text-xs text-[#163A5F]">03</span>
+          <h3 class="md:col-span-4 font-serif text-2xl font-semibold text-[#0B0C0E]">B.Sc. in Chemical Engineering</h3>
+          <p class="md:col-span-7 text-sm sm:text-base leading-relaxed text-[#52565E]">
+            First-principles quantitative grounding in mass balance, bioavailability, pharmacokinetic scaling, and rigorous supplement formulation quality.
+          </p>
+        </div>
+
+        <div class="py-7 grid grid-cols-1 md:grid-cols-12 gap-4 items-baseline">
+          <span class="md:col-span-1 font-mono text-xs text-[#163A5F]">04</span>
+          <h3 class="md:col-span-4 font-serif text-2xl font-semibold text-[#0B0C0E]">IFBB Pro Bodybuilder &amp; Athlete</h3>
+          <p class="md:col-span-7 text-sm sm:text-base leading-relaxed text-[#52565E]">
+            Earned an IFBB professional card alongside team sports competition—translating physiological theory into real-world strength, hypertrophy, and conditioning results.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Speaking Formats -->
+  <section class="bg-[#F5F4F0]">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 py-14 sm:py-20 space-y-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-[#0B0C0E]/15">
+        <div class="space-y-2">
+          <p class="text-xs font-semibold tracking-wide text-[#163A5F]">Media &amp; Keynotes</p>
+          <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-[#0B0C0E]">Speaking Formats</h2>
+        </div>
+        <a
+          href="/contact"
+          class="inline-flex items-center justify-center px-6 py-3 text-xs font-semibold tracking-wide text-white bg-[#0B0C0E] hover:bg-[#163A5F] transition-colors min-h-[44px]"
+        >
+          Inquire for Speaking
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {SITE_INFO.speakingFormats.map((item) => (
+          <div class="border-t border-[#0B0C0E] pt-5 space-y-2.5">
+            <p class="font-mono text-xs text-[#163A5F]">{item.index}</p>
+            <h3 class="font-serif text-2xl font-semibold text-[#0B0C0E]">{item.title}</h3>
+            <p class="text-sm leading-relaxed text-[#52565E]">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

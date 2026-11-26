@@ -1,0 +1,230 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HedCalculator from '../../components/HedCalculator';
+import NewsletterForm from '../../components/NewsletterForm';
+import { ARTICLES, SITE_INFO, type Article } from '../../data/siteData';
+
+export function getStaticPaths() {
+  return ARTICLES.map((article, index) => ({
+    params: { slug: article.slug },
+    props: {
+      article,
+      prevArticle: index > 0 ? ARTICLES[index - 1] : null,
+      nextArticle: index < ARTICLES.length - 1 ? ARTICLES[index + 1] : null,
+    },
+  }));
+}
+
+interface Props {
+  article: Article;
+  prevArticle: Article | null;
+  nextArticle: Article | null;
+}
+
+const { article, prevArticle, nextArticle } = Astro.props;
+const formattedDate = new Date(`${article.date}T12:00:00`).toLocaleDateString('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+});
+
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Articles', path: '/articles' },
+  { name: article.title, path: `/articles/${article.slug}` },
+];
+
+const articleSchema = {
+  '@type': 'BlogPosting',
+  headline: article.title,
+  description: article.excerpt,
+  datePublished: article.date,
+  author: { '@id': `${SITE_INFO.siteUrl}/#person` },
+  publisher: { '@id': `${SITE_INFO.siteUrl}/#person` },
+  image: `${SITE_INFO.siteUrl}${article.image}`,
+  articleSection: article.category,
+  citation: article.references.map((r) => `${r.citation} ${r.url}`),
+  mainEntityOfPage: `${SITE_INFO.siteUrl}/articles/${article.slug}`,
+};
+---
+
+<BaseLayout
+  title={`${article.title} — Dr. Trevor Kouritzin`}
+  description={article.excerpt.slice(0, 158)}
+  canonicalPath={`/articles/${article.slug}`}
+  ogImage={article.image}
+  ogType="article"
+  publishedTime={article.date}
+  breadcrumbs={breadcrumbs}
+  jsonLd={articleSchema}
+>
+  <article class="bg-white" itemscope itemtype="https://schema.org/BlogPosting">
+    <!-- Monograph Article Header -->
+    <header class="border-b border-[#0B0C0E]/15 bg-[#F5F4F0]">
+      <div class="max-w-[920px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-6">
+        <div class="flex flex-wrap items-center gap-2 text-xs text-[#52565E] tabular-nums">
+          <a href="/articles" class="hover:text-[#0B0C0E] underline underline-offset-4">
+            Articles
+          </a>
+          <span aria-hidden="true">/</span>
+          <span class="font-semibold tracking-wide text-[#163A5F]" itemprop="articleSection">
+            {article.category}
+          </span>
+          <span aria-hidden="true">·</span>
+          <time datetime={article.date} itemprop="datePublished">{formattedDate}</time>
+          <span aria-hidden="true">·</span>
+          <span>{article.readTimeMinutes} min read</span>
+        </div>
+
+        <h1
+          class="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold text-[#0B0C0E] leading-[1.06] tracking-tight"
+          itemprop="headline"
+        >
+          {article.title}
+        </h1>
+
+        <p class="text-base sm:text-lg text-[#52565E] leading-relaxed" itemprop="description">
+          {article.excerpt}
+        </p>
+
+        <div class="flex items-center gap-3 pt-2 border-t border-[#0B0C0E]/15">
+          <img
+            src={SITE_INFO.images.hero}
+            alt="Dr. Trevor Kouritzin"
+            width="44"
+            height="44"
+            referrerpolicy="no-referrer"
+            class="w-11 h-11 object-cover object-top border border-[#0B0C0E]/20"
+          />
+          <div>
+            <p class="text-sm font-semibold text-[#0B0C0E]" itemprop="author">{SITE_INFO.name}</p>
+            <p class="text-xs text-[#52565E]">Ph.D. Medicine · M.Sc. Human Nutrition · B.Sc. Chem Eng</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Primary Study Figure -->
+    <div class="max-w-[920px] mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+      <figure class="border border-[#0B0C0E]/15 bg-[#F5F4F0]">
+        <img
+          src={article.image}
+          alt={article.imageAlt}
+          referrerpolicy="no-referrer"
+          itemprop="image"
+          class="w-full max-h-[540px] object-contain bg-white"
+        />
+        <figcaption class="px-5 py-3 border-t border-[#E2E0DA] font-serif italic text-xs text-[#52565E]">
+          Fig. — {article.imageAlt}
+        </figcaption>
+      </figure>
+    </div>
+
+    <!-- Article Body -->
+    <div class="max-w-[920px] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-10">
+      <!-- Pull-quote style Evidence Summary (top/bottom hairline dividers) -->
+      <div class="border-y border-[#0B0C0E] py-6 space-y-2">
+        <p class="text-xs font-semibold tracking-wide text-[#163A5F]">Evidence Summary</p>
+        <p class="font-serif text-xl sm:text-2xl font-medium text-[#0B0C0E] leading-snug">
+          {article.keyTakeaway}
+        </p>
+      </div>
+
+      <div class="space-y-8 text-base sm:text-[17px] leading-[1.8] text-[#272B33] max-w-[68ch]" itemprop="articleBody">
+        {article.sections.map((sec, sIdx) => (
+          <section class="space-y-4">
+            {sec.heading && (
+              <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-[#0B0C0E] pt-2">{sec.heading}</h2>
+            )}
+            {sec.paragraphs.map((p, pIdx) => (
+              <p
+                class={
+                  sIdx === 0 && pIdx === 0
+                    ? 'first-letter:font-serif first-letter:text-5xl first-letter:font-semibold first-letter:float-left first-letter:mr-3 first-letter:leading-none first-letter:text-[#0B0C0E]'
+                    : ''
+                }
+              >
+                {p}
+              </p>
+            ))}
+            {sec.bullets && (
+              <ul class="list-disc pl-6 space-y-2.5 text-[#272B33]">
+                {sec.bullets.map((b) => (
+                  <li>{b}</li>
+                ))}
+              </ul>
+            )}
+          </section>
+        ))}
+      </div>
+
+      {article.slug === 'calculating-human-equivalent-dosages-from-animal-studies' && (
+        <div class="pt-4">
+          <HedCalculator client:visible />
+        </div>
+      )}
+
+      <!-- References -->
+      <section aria-labelledby="references-heading" class="pt-8 border-t border-[#E2E0DA] space-y-4">
+        <h2 id="references-heading" class="font-serif text-2xl font-semibold text-[#0B0C0E]">
+          Primary References
+        </h2>
+        <ol class="space-y-3 text-sm text-[#52565E] list-decimal pl-5">
+          {article.references.map((ref) => (
+            <li class="leading-relaxed">
+              <span>{ref.citation} </span>
+              <a
+                href={ref.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-mono text-xs text-[#163A5F] hover:underline break-all"
+              >
+                {ref.url}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <!-- Newsletter & Next/Prev Navigation -->
+      <div class="pt-8 border-t border-[#E2E0DA] space-y-8">
+        <div class="bg-[#F5F4F0] border border-[#0B0C0E]/15 p-6 sm:p-8 space-y-4">
+          <div class="space-y-1">
+            <p class="text-xs font-semibold tracking-wide text-[#163A5F]">Evidence Dispatch</p>
+            <h3 class="font-serif text-2xl font-semibold text-[#0B0C0E]">
+              Receive new study breakdowns via email
+            </h3>
+          </div>
+          <NewsletterForm client:visible />
+        </div>
+
+        <nav
+          aria-label="Article navigation"
+          class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2 border-t border-[#E2E0DA]"
+        >
+          {prevArticle ? (
+            <a
+              href={`/articles/${prevArticle.slug}`}
+              class="py-4 hover:text-[#163A5F] transition-colors space-y-1"
+            >
+              <p class="text-xs tracking-wide text-[#52565E]">Previous Article</p>
+              <p class="font-serif text-xl font-semibold text-[#0B0C0E]">{prevArticle.title}</p>
+            </a>
+          ) : (
+            <div />
+          )}
+
+          {nextArticle && (
+            <a
+              href={`/articles/${nextArticle.slug}`}
+              class="py-4 hover:text-[#163A5F] transition-colors space-y-1 sm:text-right"
+            >
+              <p class="text-xs tracking-wide text-[#52565E]">Next Article</p>
+              <p class="font-serif text-xl font-semibold text-[#0B0C0E]">{nextArticle.title}</p>
+            </a>
+          )}
+        </nav>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

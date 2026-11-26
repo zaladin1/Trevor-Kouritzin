@@ -1,0 +1,6 @@
+{
+  "name": "Dr. Trevor Kouritzin — Clinical Nutrition, Medicine & Performance",
+  "description": "Official platform of Dr. Trevor Kouritzin (PhD Medicine, MSc Human Nutrition, BSc Chemical Engineering, IFBB Pro). Evidence-based consultations, research articles, and peer-reviewed publications.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

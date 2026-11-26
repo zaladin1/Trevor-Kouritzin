@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --color-canvas: #FFFFFF;
+  --color-paper: #F4F6F8;
+  --color-obsidian: #0B0C0E;
+  --color-ink: #0B0C0E;
+  --color-ink-muted: #52565E;
+  --color-rule: #E2E5E9;
+  --color-sapphire: #0E2439;
+  --color-sapphire-ink: #163A5F;
+  --color-steel: #8AB4DC;
+  --color-crimson: #DC2626;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  h1, h2, .font-editorial {
+    font-family: var(--font-serif);
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-sapphire-ink);
+    outline-offset: 2px;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}

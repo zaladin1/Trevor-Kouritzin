@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm';
+import NewsletterForm from '../components/NewsletterForm';
+import { SITE_INFO } from '../data/siteData';
+
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Contact', path: '/contact' },
+];
+---
+
+<BaseLayout
+  title="Contact & Speaking Inquiries — Dr. Trevor Kouritzin"
+  description="Contact Dr. Trevor Kouritzin in Edmonton, Alberta for academic speaking, conferences, podcasts, supplement formulation consulting, or private Zoom sessions."
+  canonicalPath="/contact"
+  ogImage={SITE_INFO.images.hero}
+  breadcrumbs={breadcrumbs}
+>
+  <section class="border-b border-[#0B0C0E]/15 bg-[#F5F4F0]">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 py-14 sm:py-20 space-y-4">
+      <p class="text-xs font-semibold tracking-wide text-[#163A5F]">Ready When You Are</p>
+      <h1 class="font-serif text-4xl sm:text-6xl font-semibold text-[#0B0C0E] tracking-tight leading-[1.06]">
+        Get in Touch
+      </h1>
+      <p class="text-base sm:text-lg text-[#52565E] max-w-2xl leading-relaxed">
+        Reach out for academic &amp; industry speaking requests, conference keynotes, podcast interviews, supplement formulation consulting, or 1-on-1 coaching.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-white py-14 sm:py-20">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <div class="lg:col-span-7">
+        <ContactForm client:load contactEmail={SITE_INFO.email} />
+      </div>
+
+      <aside class="lg:col-span-5 space-y-8">
+        <div class="border-y border-[#0B0C0E]/15 py-6 space-y-5">
+          <h2 class="font-serif text-3xl font-semibold text-[#0B0C0E]">Direct Practice Details</h2>
+
+          <dl class="space-y-4 text-sm">
+            <div>
+              <dt class="text-xs font-semibold tracking-wide text-[#52565E]">Location</dt>
+              <dd class="text-[#0B0C0E] font-medium mt-1">{SITE_INFO.location}</dd>
+            </div>
+            <div>
+              <dt class="text-xs font-semibold tracking-wide text-[#52565E]">Direct Email</dt>
+              <dd class="mt-1">
+                <a
+                  href={`mailto:${SITE_INFO.email}`}
+                  class="text-[#163A5F] font-semibold hover:underline"
+                >
+                  {SITE_INFO.email}
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt class="text-xs font-semibold tracking-wide text-[#52565E]">Channels</dt>
+              <dd class="mt-1.5 flex flex-wrap gap-5">
+                {SITE_INFO.socials.map((s) => (
+                  <a
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-[#0B0C0E] font-semibold hover:text-[#163A5F] underline decoration-[#0B0C0E]/25 underline-offset-4"
+                  >
+                    {s.label}
+                  </a>
+                ))}
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="bg-[#F5F4F0] border border-[#0B0C0E]/15 p-6 sm:p-8 space-y-4">
+          <div class="space-y-1">
+            <p class="text-xs font-semibold tracking-wide text-[#163A5F]">Newsletter</p>
+            <h3 class="font-serif text-2xl font-semibold text-[#0B0C0E]">
+              Stay Ahead with Evidence-Based Insights
+            </h3>
+            <p class="text-sm text-[#52565E]">
+              Latest articles, behavioral frameworks, and practical recommendations.
+            </p>
+          </div>
+          <NewsletterForm client:visible />
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,54 @@
+---
+import '../styles/global.css';
+import SEOHead from '../components/SEOHead.astro';
+import Header from '../components/Header';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article' | 'profile';
+  publishedTime?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  breadcrumbs?: { name: string; path: string }[];
+}
+
+const props = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <SEOHead {...props} />
+  </head>
+  <body class="min-h-screen flex flex-col bg-white text-[#0B0C0E] antialiased selection:bg-[#0B0C0E] selection:text-white">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#111315] focus:text-white focus:rounded-md focus:text-sm"
+    >
+      Skip to main content
+    </a>
+
+    <Header client:load currentPath={currentPath} />
+
+    <main id="main-content" class="flex-1" data-agent-page={currentPath}>
+      <slot />
+    </main>
+
+    <Footer />
+
+    <!-- Standards-compliant pageview & structured agent event bootstrap -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'page_view',
+        page_path: window.location.pathname,
+        page_title: document.title,
+        timestamp: new Date().toISOString(),
+      });
+    </script>
+  </body>
+</html>
