@@ -37,7 +37,7 @@ export interface ServiceItem {
   id: string;
   slug: string;
   title: string;
-  category: 'Consultation' | 'Digital Guide';
+  category: 'Consultation';
   price: number;
   currency: 'USD';
   format: string;
@@ -154,46 +154,6 @@ export const SERVICES: ServiceItem[] = [
       '100% satisfaction guarantee',
     ],
     ctaLabel: 'Schedule Consultation',
-  },
-  {
-    id: 'keto-ebook',
-    slug: 'ketogenic-diets-explained-ebook',
-    title: 'Ketogenic Diets Explained E-Book',
-    category: 'Digital Guide',
-    price: 10,
-    currency: 'USD',
-    format: 'Digital PDF Monograph · Instant Access',
-    image: '/images/service-keto.jpg',
-    imageAlt: 'Ketogenic Diets Explained E-Book Cover by Dr. Trevor Kouritzin',
-    summary:
-      'A clear, physiology-first breakdown of ketogenesis, substrate utilization, electrolyte management, performance trade-offs, and practical ketogenic meal structuring without the internet myths.',
-    deliverables: [
-      'Biochemical foundations of nutritional ketosis and fat oxidation',
-      'Clinical vs. athletic performance applications and contraindications',
-      'Macronutrient calibration and micronutrient / electrolyte checklists',
-      '100% satisfaction guarantee',
-    ],
-    ctaLabel: 'Request E-Book',
-  },
-  {
-    id: 'size-strength-ebook',
-    slug: 'size-and-strength-ebook',
-    title: 'Size And Strength E-Book',
-    category: 'Digital Guide',
-    price: 10,
-    currency: 'USD',
-    format: 'Digital PDF Training & Nutrition Guide',
-    image: '/images/service-strength.jpg',
-    imageAlt: 'Size and Strength Training Program E-Book Cover by Dr. Trevor Kouritzin',
-    summary:
-      'Built from competitive IFBB Pro experience and exercise physiology, this structured program details progressive overload, volume landmarks, recovery management, and peri-workout nutrition.',
-    deliverables: [
-      'Periodized hypertrophy and maximal strength mesocycle templates',
-      'Exercise selection rationale grounded in biomechanics and fatigue management',
-      'Evidence-aligned protein, carbohydrate, and ergogenic supplement timing',
-      '100% satisfaction guarantee',
-    ],
-    ctaLabel: 'Request E-Book',
   },
 ];
 

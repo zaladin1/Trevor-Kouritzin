@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Loader2 } from 'lucide-react';
 import { trackAgentEvent } from '../lib/tracking';
+import { submitToFormSubmit } from '../lib/formsubmit';
 
 interface NewsletterFormProps {
   variant?: 'light' | 'dark';
@@ -10,9 +11,10 @@ export default function NewsletterForm({ variant = 'light' }: NewsletterFormProp
   const [email, setEmail] = useState('');
   const [honeypot, setHoneypot] = useState('');
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (honeypot.trim() !== '') return;
 
@@ -22,12 +24,33 @@ export default function NewsletterForm({ variant = 'light' }: NewsletterFormProp
       return;
     }
 
-    setSubscribed(true);
-    trackAgentEvent({
-      event: 'newsletter_subscribe',
-      entityType: 'newsletter',
-      label: 'evidence-insights',
-    });
+    setIsSubmitting(true);
+    try {
+      await submitToFormSubmit({
+        subject: `[DoctorTrev] New Research Dispatch Subscription — ${email.trim()}`,
+        replyTo: email.trim(),
+        fields: {
+          Form_Type: 'Newsletter Subscription',
+          Subscriber_Email: email.trim(),
+          Source_Page: typeof window !== 'undefined' ? window.location.pathname : '/',
+        },
+      });
+
+      setSubscribed(true);
+      trackAgentEvent({
+        event: 'newsletter_subscribe',
+        entityType: 'newsletter',
+        label: 'evidence-insights',
+      });
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Unable to subscribe right now. Please try again shortly.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (subscribed) {
@@ -81,14 +104,24 @@ export default function NewsletterForm({ variant = 'light' }: NewsletterFormProp
 
         <button
           type="submit"
-          className={`inline-flex items-center justify-center gap-2 px-6 h-12 text-xs font-semibold tracking-wide transition-colors whitespace-nowrap shrink-0 ${
+          disabled={isSubmitting}
+          className={`inline-flex items-center justify-center gap-2 px-6 h-12 text-xs font-semibold tracking-wide transition-colors whitespace-nowrap shrink-0 disabled:opacity-60 ${
             variant === 'dark'
               ? 'bg-white text-[#0B0C0E] hover:bg-[#F5F4F0]'
               : 'bg-[#0B0C0E] text-white hover:bg-[#163A5F]'
           }`}
         >
-          Subscribe
-          <ArrowRight className="w-4 h-4" aria-hidden="true" />
+          {isSubmitting ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
+              Subscribing...
+            </>
+          ) : (
+            <>
+              Subscribe
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </>
+          )}
         </button>
       </div>
 

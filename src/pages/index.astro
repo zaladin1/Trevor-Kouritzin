@@ -376,61 +376,77 @@ const homeJsonLd = {
     </div>
   </section>
 
-  <!-- SECTION 6: Services & Monographs Catalog Preview -->
+  <!-- SECTION 6: Private Consultation Feature -->
   <section class="border-b border-[#E2E0DA] bg-[#F5F4F0]">
     <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 py-14 sm:py-20 space-y-10">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-[#0B0C0E]/15">
         <div class="space-y-2 max-w-2xl">
           <p class="text-xs font-semibold tracking-wide text-[#163A5F]">
-            Advisory &amp; Monographs
+            Private Advisory
           </p>
           <h2 class="font-serif text-3xl sm:text-5xl font-semibold text-[#0B0C0E] tracking-tight">
-            Consultations &amp; Digital Guides
+            1-on-1 Consultation
           </h2>
           <p class="text-sm sm:text-base text-[#52565E]">
             Backed by a 100% satisfaction guarantee.
           </p>
         </div>
         <a
-          href="/services"
+          href="/services#consultation"
           class="text-xs font-semibold tracking-wide text-[#0B0C0E] hover:text-[#163A5F] underline decoration-[#0B0C0E]/30 underline-offset-8 whitespace-nowrap self-start md:self-auto"
         >
-          Schedule or Request
+          Schedule Consultation
         </a>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-        {SERVICES.map((srv) => (
-          <a
-            href={`/services#${srv.id === 'zoom-consultation' ? 'consultation' : srv.id}`}
-            class="group flex flex-col justify-between border-b border-[#0B0C0E]/15 pb-6"
-          >
-            <div class="space-y-4">
-              <div class="aspect-[4/3] bg-white overflow-hidden border border-[#E2E0DA]">
-                <img
-                  src={srv.image}
-                  alt={srv.imageAlt}
-                  loading="lazy"
-                  referrerpolicy="no-referrer"
-                  class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
-                />
-              </div>
-              <div class="flex items-baseline justify-between gap-3">
-                <h3 class="font-serif text-2xl font-semibold text-[#0B0C0E] group-hover:text-[#163A5F] transition-colors">
+      {SERVICES.map((srv) => (
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center bg-white border border-[#E2E0DA] p-6 sm:p-10">
+          <div class="lg:col-span-5 aspect-[4/3] bg-[#F5F4F0] overflow-hidden border border-[#E2E0DA]">
+            <img
+              src={srv.image}
+              alt={srv.imageAlt}
+              loading="lazy"
+              referrerpolicy="no-referrer"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div class="lg:col-span-7 space-y-5">
+            <div class="flex flex-wrap items-baseline justify-between gap-4 pb-4 border-b border-[#E2E0DA]">
+              <div>
+                <p class="text-xs font-semibold tracking-wide text-[#163A5F] mb-1">
+                  {srv.format}
+                </p>
+                <h3 class="font-serif text-3xl sm:text-4xl font-semibold text-[#0B0C0E]">
                   {srv.title}
                 </h3>
-                <span class="font-mono text-base font-medium text-[#0B0C0E] tabular-nums shrink-0">
-                  ${srv.price.toFixed(2)}
-                </span>
               </div>
-              <p class="text-sm text-[#52565E] leading-relaxed line-clamp-2">{srv.summary}</p>
+              <span class="font-mono text-2xl font-medium text-[#0B0C0E] tabular-nums">
+                ${srv.price.toFixed(2)} USD
+              </span>
             </div>
-            <p class="text-xs font-semibold tracking-wide text-[#163A5F] pt-4">
-              {srv.ctaLabel}
-            </p>
-          </a>
-        ))}
-      </div>
+
+            <p class="text-base text-[#52565E] leading-relaxed">{srv.summary}</p>
+
+            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+              {srv.deliverables.map((item) => (
+                <li class="flex items-start gap-2.5 text-sm text-[#52565E]">
+                  <span class="text-[#163A5F] font-semibold mt-0.5">&#10003;</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div class="pt-3">
+              <a
+                href="/services#consultation"
+                class="inline-flex items-center justify-center px-6 py-3.5 text-xs font-semibold tracking-wide text-white bg-[#0B0C0E] hover:bg-[#163A5F] transition-colors min-h-[44px]"
+              >
+                {srv.ctaLabel} &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   </section>
 

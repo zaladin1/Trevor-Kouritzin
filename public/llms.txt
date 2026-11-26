@@ -7,7 +7,7 @@ Dr. Trevor Kouritzin translates peer-reviewed medical, nutritional, and biochemi
 ## Primary Pages
 - [Home](https://trevorkouritzin.com/): Executive overview, methodology, featured research articles, and peer-reviewed publications.
 - [Meet Dr. Trevor](https://trevorkouritzin.com/meet-trevor): Academic credentials, competitive athletic background, and speaking formats.
-- [Services & E-Books](https://trevorkouritzin.com/services): 1-Hour Zoom Consultation ($200), Ketogenic Diets Explained E-Book ($10), and Size & Strength E-Book ($10).
+- [Services](https://trevorkouritzin.com/services): 1-Hour Zoom Consultation ($200) — personalized 60-minute strategy session.
 - [Evidence-Based Articles](https://trevorkouritzin.com/articles): Searchable research breakdowns with PubMed & DOI citations plus an interactive Human Equivalent Dose (HED) calculator.
 - [Peer-Reviewed Publications](https://trevorkouritzin.com/publications): Published journal articles and conference proceedings with BibTeX/APA citation export.
 - [Contact & Speaking](https://trevorkouritzin.com/contact): Direct consulting inquiries, academic/industry speaking requests, and newsletter subscription.
