@@ -86,7 +86,7 @@ export const SITE_INFO = {
   credentials: [
     {
       label: 'Ph.D. Medicine',
-      detail: 'Division of Preventive Medicine · University of Alberta',
+      detail: 'Nutrition Epidemiology & Preventive Medicine',
     },
     {
       label: 'M.Sc. Human Nutrition',
